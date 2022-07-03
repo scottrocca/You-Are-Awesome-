@@ -10,7 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    var currentMessageIndex = 0
+    var currentImageIndex = -1
+    var currentMessageIndex = -1
     let totalNumberOfImages = 9
     
     override func viewDidLoad() {
@@ -27,18 +28,32 @@ class ViewController: UIViewController {
                         "Fabulous? That's You!",
                         "You've Got the Design Skills of Jony Ive"]
         
-        var newMessage = messages[Int.random(in: 0...messages.count-1)]
-        while newMessage == messageLabel.text {
-            newMessage = messages[Int.random(in: 0...messages.count-1)]
-        }
-        messageLabel.text = newMessage
+        var newMessageIndex: Int
+        repeat {
+            newMessageIndex = Int.random(in: 0..<messages.count)
+        } while newMessageIndex == currentMessageIndex
+        currentMessageIndex = newMessageIndex
+        messageLabel.text = messages[currentMessageIndex]
         
+        var newImageIndex: Int
+        repeat {
+            newImageIndex = Int.random(in: 0...totalNumberOfImages)
+        } while newImageIndex == currentImageIndex
+        currentImageIndex = newImageIndex
+        imageView.image = UIImage(named: "image\(currentImageIndex)")
         
-        var newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
-        while newImage == imageView.image {
-            newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
-        }
-        imageView.image = newImage
+//        var newMessage = messages[Int.random(in: 0...messages.count-1)]
+//        while newMessage == messageLabel.text {
+//            newMessage = messages[Int.random(in: 0...messages.count-1)]
+//        }
+//        messageLabel.text = newMessage
+//
+//
+//        var newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
+//        while newImage == imageView.image {
+//            newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
+//        }
+//        imageView.image = newImage
         
         
 //        messageLabel.text = messages[currentMessageIndex]
