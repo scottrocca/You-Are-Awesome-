@@ -11,6 +11,7 @@ import AVFoundation
 class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var playSoundSwitch: UISwitch!
     
     var currentImageIndex = -1
     var currentMessageIndex = -1
@@ -18,6 +19,7 @@ class ViewController: UIViewController {
     let totalNumberOfImages = 10
     let totalNumberOfSounds = 6
     var audioPlayer: AVAudioPlayer!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,9 +63,10 @@ class ViewController: UIViewController {
         
         currentImageIndex = nonRepeatingRandom(originalNumber: currentImageIndex, upperBounds: totalNumberOfImages-1)
         imageView.image = UIImage(named: "image\(currentImageIndex)")
-        
-        currentSoundIndex = nonRepeatingRandom(originalNumber: currentSoundIndex, upperBounds: totalNumberOfSounds-1 )
-        playSound(name: "sound\(currentSoundIndex)")
+        if playSoundSwitch.isOn {
+            currentSoundIndex = nonRepeatingRandom(originalNumber: currentSoundIndex, upperBounds: totalNumberOfSounds-1 )
+            playSound(name: "sound\(currentSoundIndex)")
+        }
         
         
         
@@ -108,5 +111,12 @@ class ViewController: UIViewController {
         imageView.isHidden = false
         
     }
+    
+    @IBAction func playSoundToggled(_ sender: UISwitch) {
+        if !sender.isOn && audioPlayer != nil {
+            audioPlayer.stop()
+        }
+    }
+    
     
 }
