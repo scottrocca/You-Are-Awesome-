@@ -24,10 +24,21 @@ class ViewController: UIViewController {
                         "You Are Great!",
                         "You Are Da Bomb!",
                         "You are Fantastic",
-                        "Fabulous? That's You!"]
+                        "Fabulous? That's You!",
+                        "You've Got the Design Skills of Jony Ive"]
         
-        messageLabel.text = messages[Int.random(in: 0...messages.count-1)]
-        imageView.image = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
+        var newMessage = messages[Int.random(in: 0...messages.count-1)]
+        while newMessage == messageLabel.text {
+            newMessage = messages[Int.random(in: 0...messages.count-1)]
+        }
+        messageLabel.text = newMessage
+        
+        
+        var newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
+        while newImage == imageView.image {
+            newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
+        }
+        imageView.image = newImage
         
         
 //        messageLabel.text = messages[currentMessageIndex]
